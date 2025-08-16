@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Entity name="toilet">
+
+	<SpriteComponent 
+		image_file="data/enemies_gfx/toilet.png"
+		offset_x="16"
+		offset_y="16"
+		alpha="1"
+	>
+	</SpriteComponent>
+
+	<PhysicsBodyComponent 
+		uid="1" 
+		allow_sleep="0" 
+		angular_damping="0"
+		linear_damping="0"
+		fixed_rotation="0"
+		is_bullet="1"
+		auto_clean="1"
+	>
+	</PhysicsBodyComponent>
+
+	<PhysicsImageShapeComponent 
+		body_id="1"
+		centered="1" 
+		image_file="data/enemies_gfx/toilet.png"
+		material="meat"
+	>
+	</PhysicsImageShapeComponent>
+
+	<GravityFieldComponent
+		radius="120"
+		strength="400"
+		discard_empty_cells="0"
+	>
+	</GravityFieldComponent>
+
+	<LifetimeComponent
+		lifetime="1800"
+	>
+	</LifetimeComponent>
+
+	<LuaComponent
+		script_source_file="mods/toilet_flush_spell/files/scripts/toilet_interaction.lua"
+		execute_every_n_frame="5"
+		execute_on_added="1"
+	>
+	</LuaComponent>
+
+	<AudioComponent
+		file="data/audio/Desktop/misc.bank"
+		event_root="misc"
+	>
+	</AudioComponent>
+
+	<GameEffectComponent 
+		effect="PROTECTION_ELECTRICITY"
+		frames="-1"
+	>
+	</GameEffectComponent>
+
+</Entity>
