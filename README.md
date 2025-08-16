@@ -2,6 +2,45 @@
 
 A humorous Noita mod that adds a "Toilet Flush" spell which spawns a toilet with gravity field effects that draws enemies in and flushes them away.
 
+## 🚽 Installation (So Easy, Even Grady Can Do It!)
+
+**Step 1: Find Your Noita Folder** 🔍
+- Open Steam
+- Right-click on Noita in your library
+- Click "Manage" → "Browse local files"
+- You should see a folder that says "Noita" (congratulations, you found it!)
+
+**Step 2: Find the Mods Folder** 📁
+- Look for a folder called "mods" inside your Noita folder
+- If you don't see one, create it (yes, just make a new folder and name it "mods")
+- Don't panic if it wasn't there - that's totally normal!
+
+**Step 3: Download This Mod** ⬇️
+- Download this entire repository as a ZIP file
+- Extract it somewhere you can find it again (like your Desktop)
+- You should now have a folder called "noita_toilet_flush"
+
+**Step 4: Move the Magic** ✨
+- Copy the "noita_toilet_flush" folder
+- Paste it into that "mods" folder you found/created in Step 2
+- Your path should look like: `Noita/mods/noita_toilet_flush/`
+
+**Step 5: Turn It On** 🔌
+- Start Noita
+- Go to "Mods" in the main menu
+- Find "Toilet Flush Spell" and click the checkbox to enable it
+- Restart Noita (yes, you have to restart - trust the process)
+
+**Step 6: Flush Your Enemies!** 💩
+- Start a new game
+- Find the "Toilet Flush" spell (it's purple and has a toilet icon)
+- Cast it near enemies and watch the magic happen
+- Enjoy the satisfying sounds of your foes getting flushed!
+
+*If these instructions were too complicated, ask Grady for help - he's probably figured it out by now.*
+
+---
+
 ## Mod Description
 
 The **Toilet Flush** spell creates a toilet entity at a distance from the caster. The toilet has a gravity field that draws enemies toward it. When enemies contact the toilet:
@@ -195,7 +234,7 @@ local new_y = toilet_y + math.sin(angle) * radius
 
 ## Credits
 
-- **Concept**: Matty McLean (@mattymclean)
+- **Concept**: Grady
 - **Implementation**: Devin AI
 - **Noita**: Nolla Games
 - **Inspiration**: Personal Gravity Field spell mechanics
