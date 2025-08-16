@@ -234,7 +234,7 @@ local new_y = toilet_y + math.sin(angle) * radius
 
 ## Credits
 
-- **Concept**: Matty McLean (@mattymclean)
+- **Concept**: Grady
 - **Implementation**: Devin AI
 - **Noita**: Nolla Games
 - **Inspiration**: Personal Gravity Field spell mechanics
