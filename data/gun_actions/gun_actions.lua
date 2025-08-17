@@ -1,4 +1,4 @@
-table.insert(actions, {
+local toilet_flush_spell = {
 	id          = "TOILET_FLUSH",
 	name 		= "Toilet Flush",
 	description = "Spawns a toilet that flushes enemies down the drain!",
@@ -16,4 +16,10 @@ table.insert(actions, {
 		c.fire_rate_wait = c.fire_rate_wait + 30
 		current_reload_time = current_reload_time + 30
 	end,
-})
+}
+
+if actions_to_add ~= nil then
+	table.insert(actions_to_add, toilet_flush_spell)
+else
+	table.insert(actions, toilet_flush_spell)
+end

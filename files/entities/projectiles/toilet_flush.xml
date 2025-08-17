@@ -2,27 +2,25 @@
 <Entity name="toilet_flush">
 	
 	<ProjectileComponent 
-		lob_min_speed="200"
-		lob_max_speed="400"
-		speed_min="200"
-		speed_max="400"
-		friction="0.8"
-		direction_random_rad="0.0"
+		speed_min="150"
+		speed_max="250"
+		friction="0.95"
+		direction_random_rad="0.1"
 		on_death_explode="0"
-		on_death_gfx_leave_sprite="0" 
-		on_lifetime_out_explode="0"
+		on_death_gfx_leave_sprite="1" 
+		on_lifetime_out_explode="1"
 		explosion_dont_damage_shooter="1"
 		damage="0"
-		lifetime="180"
-		penetrate_entities="1"
-		penetrate_world="1"
-		die_on_low_velocity="0"
-		bounces_left="0"
-		collide_with_shooter_frames="0"
+		lifetime="300"
+		penetrate_entities="0"
+		penetrate_world="0"
+		die_on_low_velocity="1"
+		bounces_left="2"
+		collide_with_shooter_frames="10"
 		ragdoll_force_multiplier="0.01"
 		hit_particle_force_multiplier="0.01"
 		create_shell_casing="0"
-		muzzle_flash_file=""
+		muzzle_flash_file="data/entities/particles/muzzle_flashes/muzzle_flash_medium.xml"
 		shoot_light_flash_r="255"
 		shoot_light_flash_g="255"
 		shoot_light_flash_b="255"
@@ -31,17 +29,18 @@
 	</ProjectileComponent>
 
 	<VelocityComponent
-		gravity_y="0"
-		air_friction="0.95"
-		mass="0.04"
+		gravity_y="400"
+		air_friction="0.98"
+		mass="0.08"
 	>
 	</VelocityComponent>
 
 	<SpriteComponent 
-		image_file="mods/noita_toilet_flush/files/sprites/toilet.png"
-		offset_x="8"
-		offset_y="8"
+		image_file="mods/noita_toilet_flush/files/sprites/toilet_projectile.png"
+		offset_x="16"
+		offset_y="16"
 		alpha="1"
+		z_index="0.6"
 	>
 	</SpriteComponent>
 
@@ -51,5 +50,11 @@
 		execute_on_added="1"
 	>
 	</LuaComponent>
+
+	<AudioComponent
+		file="data/audio/Desktop/projectiles.bank"
+		event_root="projectiles"
+	>
+	</AudioComponent>
 
 </Entity>
