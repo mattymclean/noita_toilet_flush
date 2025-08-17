@@ -38,7 +38,7 @@
 	</VelocityComponent>
 
 	<SpriteComponent 
-		image_file="data/enemies_gfx/chest_random.png"
+		image_file="mods/toilet_flush_spell/files/sprites/toilet.png"
 		offset_x="8"
 		offset_y="8"
 		alpha="1"

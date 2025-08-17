@@ -2,7 +2,7 @@
 <Entity name="toilet">
 
 	<SpriteComponent 
-		image_file="data/enemies_gfx/chest_random.png"
+		image_file="mods/toilet_flush_spell/files/sprites/toilet.png"
 		offset_x="16"
 		offset_y="16"
 		alpha="1"
@@ -23,7 +23,7 @@
 	<PhysicsImageShapeComponent 
 		body_id="1"
 		centered="1" 
-		image_file="data/enemies_gfx/chest_random.png"
+		image_file="mods/toilet_flush_spell/files/sprites/toilet.png"
 		material="meat"
 	>
 	</PhysicsImageShapeComponent>
