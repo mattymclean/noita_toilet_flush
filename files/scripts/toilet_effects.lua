@@ -16,8 +16,8 @@ if not water_sound_played and effect_time > 30 then
     water_sound_played = true
 end
 
-if not flush_sound_played and effect_time > 600 then -- 10 seconds
-    GamePlaySound("data/audio/Desktop/misc.bank", "misc/water_splash_big", x, y)
+if not flush_sound_played and effect_time > 180 then -- 3 seconds
+    GamePlaySound("mods/toilet_flush_spell/files/audio/toilet_flush.ogg", "", x, y)
     ComponentSetValue2(this_comp, "flush_sound_played", true)
     flush_sound_played = true
 end
