@@ -1,8 +1,8 @@
 local actions = {
 	{
 		id          = "TOILET_FLUSH",
-		name 		= "$action_toilet_flush",
-		description = "$actiondesc_toilet_flush",
+		name 		= "Toilet Flush",
+		description = "Spawns a toilet that flushes enemies down the drain!",
 		sprite 		= "mods/noita_toilet_flush/data/ui_gfx/gun_actions/toilet_flush.png",
 		sprite_unidentified = "mods/noita_toilet_flush/data/ui_gfx/gun_actions/toilet_flush_unidentified.png",
 		related_projectiles	= {"mods/noita_toilet_flush/files/entities/projectiles/toilet_flush.xml"},
@@ -20,8 +20,6 @@ local actions = {
 	},
 }
 
-if actions_to_add ~= nil then
-	for i,v in ipairs(actions) do
-		table.insert(actions_to_add, v)
-	end
+for i,v in ipairs(actions) do
+	table.insert(actions, v)
 end
