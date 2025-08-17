@@ -2,8 +2,6 @@
 <Entity name="toilet_flush">
 	
 	<ProjectileComponent 
-		lob_min_speed="200"
-		lob_max_speed="400"
 		speed_min="200"
 		speed_max="400"
 		friction="0.8"
