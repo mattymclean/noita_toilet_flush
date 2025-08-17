@@ -2,7 +2,7 @@
 <Entity name="toilet">
 
 	<SpriteComponent 
-		image_file="mods/toilet_flush_spell/files/sprites/toilet.png"
+		image_file="mods/noita_toilet_flush/files/sprites/toilet.png"
 		offset_x="16"
 		offset_y="16"
 		alpha="1"
@@ -23,7 +23,7 @@
 	<PhysicsImageShapeComponent 
 		body_id="1"
 		centered="1" 
-		image_file="mods/toilet_flush_spell/files/sprites/toilet.png"
+		image_file="mods/noita_toilet_flush/files/sprites/toilet.png"
 		material="meat"
 	>
 	</PhysicsImageShapeComponent>
@@ -41,14 +41,14 @@
 	</LifetimeComponent>
 
 	<LuaComponent
-		script_source_file="mods/toilet_flush_spell/files/scripts/toilet_interaction.lua"
+		script_source_file="mods/noita_toilet_flush/files/scripts/toilet_interaction.lua"
 		execute_every_n_frame="5"
 		execute_on_added="1"
 	>
 	</LuaComponent>
 
 	<LuaComponent
-		script_source_file="mods/toilet_flush_spell/files/scripts/toilet_effects.lua"
+		script_source_file="mods/noita_toilet_flush/files/scripts/toilet_effects.lua"
 		execute_every_n_frame="1"
 		execute_on_added="1"
 	>

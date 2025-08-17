@@ -198,7 +198,7 @@ local new_y = toilet_y + math.sin(angle) * radius
 ### 7. Installation Instructions
 
 1. Extract Noita's game data using modding tools
-2. Copy mod folder to `Noita/mods/toilet_flush_spell/`
+2. Copy mod folder to `Noita/mods/noita_toilet_flush/`
 3. Enable mod in Noita's mod menu
 4. Restart Noita
 5. Find "Toilet Flush" spell in spell pools or use console to spawn
