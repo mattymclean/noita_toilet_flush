@@ -6,7 +6,7 @@ end
 
 function OnModInit()
 	print("Toilet Flush Spell mod: Init")
-	ModLuaFileAppend("data/scripts/gun/gun_actions.lua", "mods/toilet_flush_spell/data/gun_actions/gun_actions.lua")
+	ModLuaFileAppend("data/scripts/gun/gun_actions.lua", "mods/noita_toilet_flush/data/gun_actions/gun_actions.lua")
 end
 
 function OnModPostInit()

@@ -38,7 +38,7 @@
 	</VelocityComponent>
 
 	<SpriteComponent 
-		image_file="mods/toilet_flush_spell/files/sprites/toilet.png"
+		image_file="mods/noita_toilet_flush/files/sprites/toilet.png"
 		offset_x="8"
 		offset_y="8"
 		alpha="1"
@@ -46,7 +46,7 @@
 	</SpriteComponent>
 
 	<LuaComponent
-		script_source_file="mods/toilet_flush_spell/files/scripts/toilet_spawn.lua"
+		script_source_file="mods/noita_toilet_flush/files/scripts/toilet_spawn.lua"
 		execute_every_n_frame="1"
 		execute_on_added="1"
 	>

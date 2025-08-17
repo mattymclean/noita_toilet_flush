@@ -17,7 +17,7 @@ if not water_sound_played and effect_time > 30 then
 end
 
 if not flush_sound_played and effect_time > 180 then -- 3 seconds
-    GamePlaySound("mods/toilet_flush_spell/files/audio/toilet_flush.ogg", "", x, y)
+    GamePlaySound("mods/noita_toilet_flush/files/audio/toilet_flush.ogg", "", x, y)
     ComponentSetValue2(this_comp, "flush_sound_played", true)
     flush_sound_played = true
 end

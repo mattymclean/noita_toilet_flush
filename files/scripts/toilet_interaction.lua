@@ -24,7 +24,7 @@ for i, enemy_id in ipairs(enemies) do
                 EntityInflictDamage(enemy_id, 25, "DAMAGE_CURSE", "Toilet flush clog", "NORMAL", 0, 0, entity_id)
                 
                 local swirl_comp = EntityAddComponent2(enemy_id, "LuaComponent", {
-                    script_source_file = "mods/toilet_flush_spell/files/scripts/toilet_swirl.lua",
+                    script_source_file = "mods/noita_toilet_flush/files/scripts/toilet_swirl.lua",
                     execute_every_n_frame = 1,
                     execute_on_added = 1
                 })
@@ -34,7 +34,7 @@ for i, enemy_id in ipairs(enemies) do
                 
             else
                 local swirl_comp = EntityAddComponent2(enemy_id, "LuaComponent", {
-                    script_source_file = "mods/toilet_flush_spell/files/scripts/toilet_swirl.lua",
+                    script_source_file = "mods/noita_toilet_flush/files/scripts/toilet_swirl.lua",
                     execute_every_n_frame = 1,
                     execute_on_added = 1
                 })
