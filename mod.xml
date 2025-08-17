@@ -1,7 +1,7 @@
 <Mod
 	name="Toilet Flush Spell"
 	description="Adds a humorous Toilet Flush spell that spawns a toilet with gravity field effects. Enemies get flushed down the drain!"
-	author="Matty McLean (@mattymclean)"
+	author="Grady"
 	version="1.0.0"
 	version_built_with="1.0.0.0"
 	tags="spell,humor,gravity,toilet"
