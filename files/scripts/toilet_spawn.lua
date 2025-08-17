@@ -8,3 +8,11 @@ function shot()
 	
 	EntityKill(entity_id)
 end
+
+function collision_trigger()
+	shot()
+end
+
+function death()
+	shot()
+end

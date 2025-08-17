@@ -10,7 +10,7 @@ for i, enemy_id in ipairs(enemies) do
         local enemy_x, enemy_y = EntityGetTransform(enemy_id)
         local distance = math.sqrt((enemy_x - x)^2 + (enemy_y - y)^2)
         
-        if distance < 30 then
+        if distance < 60 then
             local damage_comp = EntityGetFirstComponentIncludingDisabled(enemy_id, "DamageModelComponent")
             local max_hp = 100
             
