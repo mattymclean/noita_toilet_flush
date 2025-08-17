@@ -20,7 +20,7 @@
 		ragdoll_force_multiplier="0.01"
 		hit_particle_force_multiplier="0.01"
 		create_shell_casing="0"
-		muzzle_flash_file=""
+		muzzle_flash_file="data/entities/particles/muzzle_flashes/muzzle_flash_medium.xml"
 		shoot_light_flash_r="255"
 		shoot_light_flash_g="255"
 		shoot_light_flash_b="255"
@@ -50,5 +50,11 @@
 		execute_on_added="1"
 	>
 	</LuaComponent>
+
+	<AudioComponent
+		file="data/audio/Desktop/projectiles.bank"
+		event_root="projectiles"
+	>
+	</AudioComponent>
 
 </Entity>
