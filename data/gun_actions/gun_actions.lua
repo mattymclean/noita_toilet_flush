@@ -20,6 +20,8 @@ local actions = {
 	},
 }
 
-for i,v in ipairs(actions) do
-	table.insert(actions_to_add, v)
+if actions_to_add ~= nil then
+	for i,v in ipairs(actions) do
+		table.insert(actions_to_add, v)
+	end
 end
