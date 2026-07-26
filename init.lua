@@ -4,9 +4,10 @@ function OnModInit()
 end
 
 function OnPlayerSpawned(player_entity)
-	-- TESTING convenience: drop a Toilet Flush spell card next to the player on spawn.
-	-- Remove (or comment out) the CreateItemActionEntity line for a normal playthrough.
+	-- TESTING convenience: drop a ready-to-fire toilet wand (plus a spare spell card)
+	-- next to the player on spawn. Comment this out for a normal playthrough.
 	local x, y = EntityGetTransform(player_entity)
-	CreateItemActionEntity("TOILET_FLUSH", x + 12, y - 6)
-	GamePrint("Toilet Flush: spell card dropped at your feet (testing mode)")
+	EntityLoad("mods/noita_toilet_flush/files/entities/toilet_wand.xml", x + 14, y - 4)
+	CreateItemActionEntity("TOILET_FLUSH", x - 14, y - 4)
+	GamePrint("Toilet Flush: the Flusher 3000 wand is at your feet - press E to grab it (testing mode)")
 end
