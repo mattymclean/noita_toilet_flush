@@ -10,6 +10,7 @@ local CAPTURE_RADIUS = 14    -- pixels: enemies inside this start swirling
 local SWIRL_FRAMES   = 110   -- ~1.8s of swirling before the flush resolves
 local PULL_COEFF     = 30    -- velocity added per tick at point-blank range
 local SMALL_MAX_HP   = 6.0   -- internal hp units (x25 shown in game); <= this gets flushed for good
+local KILL_GROWTH    = 2.0   -- each successful flush raises the kill line by this much (+50 shown HP)
 local CLOG_DAMAGE    = 2.0   -- 50 shown damage dealt to big enemies that clog the toilet
 
 local toilet_id = GetUpdatedEntityID()
@@ -108,10 +109,24 @@ for _, v in ipairs(victims) do
 				GameCreateParticle("water", x, y - 6, 14, 0, -60, false, false)
 				GameScreenshake(4, x, y)
 
+				-- The pipes warm up: every successful flush raises this toilet's kill line
+				local kills = get_int(toilet_id, "toilet_kills", 0)
+				local kill_line = SMALL_MAX_HP + kills * KILL_GROWTH
+
 				local max_hp = ComponentGetValue2(dm, "max_hp") or 0
-				if max_hp <= SMALL_MAX_HP then
+				if max_hp <= kill_line then
 					-- Small enough to fit down the pipes: proper death (drops gold), disintegrate fx
 					EntityInflictDamage(v, max_hp * 4 + 10, "DAMAGE_CURSE", "flushed down the toilet", "DISINTEGRATED", 0, 0, toilet_id)
+					kills = kills + 1
+					set_int(toilet_id, "toilet_kills", kills)
+					if kills == 3 then
+						GamePrint("The toilet gurgles ominously. The pipes are warming up...")
+					elseif kills == 6 then
+						GamePrint("The toilet's suction grows unnatural. Larger prey beware.")
+					elseif kills == 10 then
+						GamePrint("THE PORCELAIN THRONE HUNGERS.")
+						GameScreenshake(8, x, y)
+					end
 				else
 					-- Too big: the toilet clogs, chews on them and spits them back out
 					set_int(v, "toilet_swirl", 0)
