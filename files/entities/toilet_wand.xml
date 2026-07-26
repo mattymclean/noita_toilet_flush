@@ -28,8 +28,8 @@
 
 	<HotspotComponent
 		_tags="shoot_pos"
-		offset.x="6"
-		offset.y="-0.5" >
+		offset.x="12"
+		offset.y="-2" >
 	</HotspotComponent>
 
 	<Base file="data/entities/base_item.xml" >
