@@ -1,8 +1,8 @@
-# Noita Toilet Flush Spell Mod
+# Noita Toilet Flush Spell Mod 🚽
 
-A humorous Noita mod that adds a "Toilet Flush" spell which spawns a toilet with gravity field effects that draws enemies in and flushes them away.
+A humorous Noita mod that adds the **Toilet Flush** spell: lob a porcelain throne at your enemies, watch it suck them in, swirl them around the bowl, and flush them into the abyss. The more it flushes, the hungrier it gets.
 
-## 🚽 Installation (So Easy, Even Grady Can Do It!)
+## Installation (So Easy, Even Grady Can Do It!)
 
 **Step 1: Find Your Noita Folder** 🔍
 - Open Steam
@@ -13,231 +13,97 @@ A humorous Noita mod that adds a "Toilet Flush" spell which spawns a toilet with
 **Step 2: Find the Mods Folder** 📁
 - Look for a folder called "mods" inside your Noita folder
 - If you don't see one, create it (yes, just make a new folder and name it "mods")
-- Don't panic if it wasn't there - that's totally normal!
 
-**Step 3: Download This Mod** ⬇️
-- Download this entire repository as a ZIP file
-- Extract it somewhere you can find it again (like your Desktop)
-- You should now have a folder called "noita_toilet_flush"
+**Step 3: Get This Mod** ⬇️
+- Download this repository as a ZIP and extract it
+- Rename the extracted folder to exactly `noita_toilet_flush` (GitHub likes to add `-main` to the name — delete that part, it matters!)
+- Move it into the mods folder: `Noita/mods/noita_toilet_flush/`
 
-**Step 4: Move the Magic** ✨
-- Copy the "noita_toilet_flush" folder
-- Paste it into that "mods" folder you found/created in Step 2
-- Your path should look like: `Noita/mods/noita_toilet_flush/`
-
-**Step 5: Turn It On** 🔌
-- Start Noita
-- Go to "Mods" in the main menu
-- Find "Toilet Flush Spell" and click the checkbox to enable it
+**Step 4: Turn It On** 🔌
+- Start Noita → "Mods" in the main menu
+- Click **Toilet Flush Spell** so it shows `[x]` (careful: clicking the name toggles it on AND off)
 - Restart Noita (yes, you have to restart - trust the process)
 
-**Step 6: Flush Your Enemies!** 💩
-- Start a new game
-- Find the "Toilet Flush" spell (it's purple and has a toilet icon)
-- Cast it near enemies and watch the magic happen
-- Enjoy the satisfying sounds of your foes getting flushed!
+**Step 5: Flush Your Enemies!** 💩
+- The spell appears in the world like any other: in chests, shops, and wands (rare early, common deep down)
+- Lob it near enemies and enjoy the satisfying sound of your foes going down the drain
 
 *If these instructions were too complicated, ask Grady for help - he's probably figured it out by now.*
 
----
+## What It Does
 
-## Mod Description
+- **Lob a toilet.** It's a real physics object — it arcs, bounces, tumbles, and lands. It's even destructible, so guard your throne.
+- **Suction.** Enemies within range get dragged toward the bowl. Ragdolls and loose props get pulled too, because physics is funny.
+- **The swirl.** Anything that touches the bowl spins around it in a shrinking spiral with water splashing everywhere.
+- **The flush.** Small enemies (≤150 max HP) go down the pipes for good — proper deaths, gold and all, killed by *"flushed down the toilet"*.
+- **The clog.** Big enemies don't fit: they take 50 damage per cycle and get spat back out... until they come back for more.
+- **THE PIPES HUNGER.** Every successful flush raises that toilet's kill threshold by 50 HP. Feed it the little ones, and eventually it can swallow the big ones. Listen for the milestones:
+  - 3 flushes: *"The toilet gurgles ominously. The pipes are warming up..."*
+  - 6 flushes: *"The toilet's suction grows unnatural. Larger prey beware."*
+  - 10 flushes: *"THE PORCELAIN THRONE HUNGERS."*
+- Each toilet lasts **30 seconds**, each spell card has **15 uses**, and yes, you can have multiple toilets going at once.
 
-The **Toilet Flush** spell creates a toilet entity at a distance from the caster. The toilet has a gravity field that draws enemies toward it. When enemies contact the toilet:
+## The Secret Code 🤫
 
-- **Small enemies**: Begin swirling around the toilet bowl as if being flushed, then shrink and disappear (die)
-- **Large enemies**: Get "clogged" - they swirl around but take damage instead of dying
-- **Audio progression**: Starts with running water sound, transitions to flush sound that ends when enemies are shrunk
-- **Visual effects**: Mud particles are flung around for humorous effect
-- **Duration**: Toilet disappears after 30 seconds
+There's a hidden way to summon the **Flusher 3000** — a wand that is itself a tiny floating toilet, pre-loaded with the spell.
 
-## Implementation Plan
+<details>
+<summary>Spoiler (Grady, earn it honestly first)</summary>
 
-### 1. Mod Directory Structure
+Open **Options → Mods → Mod settings** (works mid-run from the pause menu), find **Toilet Flush Spell**, and type `FLUSHME` into the Secret code box. The wand appears at your feet. The code is consumed each time — type it again for another.
+
+</details>
+
+## Balance Cheat Sheet
+
+| Thing | Value | Where to tweak |
+|---|---|---|
+| Uses per spell card | 15 | `data/gun_actions/gun_actions.lua` |
+| Mana cost | 60 | same |
+| Toilet lifetime | 30 s | `lifetime` in `files/entities/projectiles/toilet_flush.xml` |
+| Suction radius | 96 px | `SUCK_RADIUS` in `files/scripts/toilet_update.lua` |
+| Swirl duration | ~1.8 s | `SWIRL_FRAMES`, same file |
+| Base kill line | 150 max HP | `SMALL_MAX_HP` (internal units ×25), same file |
+| Kill line growth per flush | +50 HP | `KILL_GROWTH`, same file |
+| Clog damage | 50 per cycle | `CLOG_DAMAGE`, same file |
+
+## How It Works (For Modders)
+
+The mod is small on purpose — three Lua scripts and three entity XMLs:
+
 ```
 noita_toilet_flush/
-├── mod.xml                          # Mod metadata
-├── init.lua                         # Mod entry point with hooks
+├── mod.xml                                  # Mod metadata
+├── init.lua                                 # Spell registration hook + secret code watcher
+├── settings.lua                             # Mod settings page (the secret code box)
 ├── data/
-│   ├── gun_actions/
-│   │   └── gun_actions.lua         # Spell registration
-│   └── scripts/
-│       └── toilet_flush_action.lua # Main spell action script
-├── files/
-│   ├── entities/
-│   │   └── toilet_flush/
-│   │       ├── toilet.xml          # Toilet entity definition
-│   │       └── toilet_sprite.png   # Toilet sprite asset
-│   ├── scripts/
-│   │   ├── toilet_interaction.lua  # Enemy interaction logic
-│   │   ├── toilet_swirl.lua        # Swirling animation system
-│   │   └── toilet_effects.lua      # Particle and audio effects
-│   └── audio/
-│       ├── running_water.ogg       # Running water sound
-│       └── flush_sound.ogg         # Toilet flush sound
-└── README.md                        # This file
+│   ├── gun_actions/gun_actions.lua          # Spell definition (appended to the game's spell list)
+│   └── ui_gfx/gun_actions/*.png             # 16x16 spell icons
+└── files/
+    ├── entities/
+    │   ├── projectiles/toilet_flush.xml     # THE toilet: a physics projectile (TNT-box pattern)
+    │   ├── toilet_wand.xml                  # The Flusher 3000
+    │   └── toilet_wand_sprite.xml           # Wand sprite layout
+    ├── scripts/
+    │   ├── toilet_update.lua                # All gameplay: suction, swirl, flush, clog, scaling
+    │   └── toilet_wand_setup.lua            # Puts the spell into the Flusher 3000
+    └── sprites/                             # 16x16 toilet art
 ```
 
-### 2. Core Components
+Design notes, learned the hard way:
 
-#### Spell Registration (`data/gun_actions/gun_actions.lua`)
-- Register new spell with ID "TOILET_FLUSH"
-- Set spell properties: mana cost (50-80), cast delay, spread
-- Reference existing spell patterns for consistency
-
-#### Toilet Entity (`files/entities/toilet_flush/toilet.xml`)
-- Define entity components:
-  - `SpriteComponent` for toilet visual
-  - `PhysicsBodyComponent` for collision detection
-  - `GravityFieldComponent` based on Personal Gravity Field implementation
-  - `LifetimeComponent` for 30-second duration
-  - Custom collision detection components
-
-#### Spell Action (`data/scripts/toilet_flush_action.lua`)
-- Use `EntityLoad()` to spawn toilet entity at calculated distance from caster
-- Set up entity positioning and initial properties
-- Initialize gravity field and timer systems
-
-#### Enemy Interaction System (`files/scripts/toilet_interaction.lua`)
-- Implement collision detection between enemies and toilet
-- Determine enemy size classification (small vs large)
-- Trigger appropriate behavior (death vs damage)
-- Manage swirling animation state
-
-#### Swirling Animation (`files/scripts/toilet_swirl.lua`)
-- Implement circular motion mathematics for swirling effect
-- Use trigonometric calculations for smooth orbital movement
-- Add timer-based shrinking effect using SpriteComponent scaling
-- Handle entity cleanup and removal
-
-#### Audio & Effects (`files/scripts/toilet_effects.lua`)
-- Manage audio progression (running water → flush sound)
-- Implement mud particle effects using Noita's particle system
-- Coordinate timing between audio and visual effects
-
-### 3. Technical Implementation Details
-
-#### Gravity Field Mechanics
-- Reference "Personal Gravity Field" spell (ID: PERSONAL_GRAVITY_FIELD)
-- Use existing `GravityFieldComponent` with appropriate radius (100-150 pixels)
-- Adjust gravity strength for balanced gameplay
-
-#### Enemy Size Detection
-- Use entity bounding box or health values to classify enemy size
-- Small enemies: < 100 HP or specific entity tags
-- Large enemies: > 100 HP or boss-type entities
-- Implement fallback logic for edge cases
-
-#### Swirling Mathematics
-```lua
--- Circular motion around toilet center
-local angle = GameGetFrameNum() * swirl_speed
-local radius = base_radius + (shrink_factor * time_elapsed)
-local new_x = toilet_x + math.cos(angle) * radius
-local new_y = toilet_y + math.sin(angle) * radius
-```
-
-#### Audio System
-- Use `GamePlaySound()` for audio playback
-- Implement state machine for audio progression
-- Coordinate audio timing with animation phases
-
-### 4. Asset Requirements
-
-#### Sprites
-- Extract toilet sprite from Noita's game files using data extraction tools
-- Location: `%localappdata%Low\Nolla_Games_Noita\data\enemies_gfx\` (approximate)
-- Alternative: Create custom toilet sprite if needed
-
-#### Audio Files
-- Running water sound effect (looping)
-- Toilet flush sound effect (one-shot)
-- Format: OGG Vorbis (Noita standard)
-
-### 5. Balancing Parameters
-
-#### Spell Properties
-- **Mana cost**: 60 mana (moderate-high cost for powerful effect)
-- **Cast delay**: 30 frames (0.5 seconds)
-- **Spread**: 0 degrees (precise targeting)
-- **Spawn distance**: 150-200 pixels from caster
-
-#### Gravity Field
-- **Radius**: 120 pixels
-- **Strength**: Moderate (enough to pull enemies but not overpowered)
-- **Duration**: 30 seconds total
-
-#### Enemy Interactions
-- **Swirling duration**: 2-3 seconds before shrinking
-- **Damage for large enemies**: 25-50 HP per flush cycle
-- **Shrinking speed**: 0.1 scale reduction per frame
-
-### 6. Testing Strategy
-
-#### Development Testing
-1. Load mod in Noita with console enabled
-2. Spawn spell using console commands or wand editor
-3. Test toilet spawning at correct distance
-4. Verify gravity field attracts different enemy types
-5. Test swirling and shrinking animations
-6. Verify audio progression timing
-7. Check particle effects appearance
-
-#### Compatibility Testing
-- Test with various enemy types (small, medium, large, bosses)
-- Verify mod doesn't conflict with other popular mods
-- Test performance impact with multiple toilets
-- Ensure proper cleanup prevents memory leaks
-
-#### Edge Case Testing
-- Multiple enemies simultaneously
-- Very large enemies (bosses)
-- Enemies with special properties (flying, incorporeal)
-- Toilet spawning in confined spaces
-
-### 7. Installation Instructions
-
-1. Extract Noita's game data using modding tools
-2. Copy mod folder to `Noita/mods/noita_toilet_flush/`
-3. Enable mod in Noita's mod menu
-4. Restart Noita
-5. Find "Toilet Flush" spell in spell pools or use console to spawn
-
-### 8. Known Limitations
-
-- May not work properly with all enemy types
-- Performance impact with many simultaneous toilets
-- Audio timing may vary based on game performance
-- Large enemies might clip through toilet geometry
-
-### 9. Future Enhancements
-
-- Multiple toilet variants (golden toilet, cursed toilet)
-- Upgradeable flush power
-- Special interactions with water-based enemies
-- Toilet paper projectile spell
-- Plumber enemy type that repairs broken toilets
-
-## Development Status
-
-- [ ] Set up mod directory structure
-- [ ] Extract toilet sprite assets
-- [ ] Implement spell registration
-- [ ] Create toilet entity definition
-- [ ] Implement gravity field mechanics
-- [ ] Add enemy interaction system
-- [ ] Create swirling animation logic
-- [ ] Implement audio progression
-- [ ] Add mud particle effects
-- [ ] Test and balance gameplay
-- [ ] Create installation package
+- **The projectile IS the toilet.** Modeled on vanilla `data/entities/projectiles/deck/tntbox.xml` — no fragile "spawn a second entity on death" handoff. `<Base file="data/entities/base_projectile_physics.xml">` does the heavy lifting.
+- **There is no gravity-field component in Noita.** Suction is a Lua script (`toilet_update.lua`, run every 2 frames by a `LuaComponent`), patterned on vanilla `data/scripts/buildings/gravity_field.lua`: velocity nudges for creatures via `VelocityComponent`/`CharacterDataComponent`, `PhysicsApplyForceOnArea()` for physics bodies.
+- **State lives in `VariableStorageComponent`s** (per-toilet flush count and age, per-victim swirl timer). You cannot invent new fields on components.
+- **Sounds are vanilla FMOD bank events** (`GamePlaySound` can't play loose .ogg files). Water is real `GameCreateParticle("water", ...)` — the flush splash is wet because it actually is.
+- Unpack the game data with `noita_dev.exe -wizard_unpak` and keep `tools_modding/component_documentation.txt` + `lua_api_documentation.txt` open. Verify every component and function name against them — the engine fails silently on things that don't exist.
 
 ## Credits
 
 - **Concept**: Grady
-- **Implementation**: Devin AI
+- **Implementation**: Matty & Claude (rebuilt from the ground up after a valiant 25-commit siege by Devin AI)
 - **Noita**: Nolla Games
-- **Inspiration**: Personal Gravity Field spell mechanics
+- **Inspiration**: The TNT Box spell, vanilla gravity fields, and household plumbing
 
 ## License
 
