@@ -67,6 +67,23 @@
 		herd_id="player"
 	></GenomeDataComponent>
 
+	<!-- The toilet drinks nearby liquids (pattern from vanilla vacuum_liquid.xml).
+	     Everything it swallows spills back out when it dies. Plumbing is temporary. -->
+	<MaterialSuckerComponent
+		num_cells_sucked_per_frame="60"
+		randomized_position.min_x="-48"
+		randomized_position.max_x="48"
+		randomized_position.min_y="-48"
+		randomized_position.max_y="48"
+		material_type="0"
+		barrel_size="15000"
+	></MaterialSuckerComponent>
+
+	<MaterialInventoryComponent
+		drop_as_item="0"
+		on_death_spill="1"
+	></MaterialInventoryComponent>
+
 	<LuaComponent
 		script_source_file="mods/noita_toilet_flush/files/scripts/toilet_update.lua"
 		execute_every_n_frame="2"
